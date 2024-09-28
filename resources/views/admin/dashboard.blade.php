@@ -1,8 +1,6 @@
 @extends('layouts.app')
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
 
     <meta charset="utf-8">
@@ -94,7 +92,6 @@
 
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -155,16 +152,16 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" id="searchButton">
-                        <div class="input-group-append">
-                            <button class="btn btn-form" type="button" id="searchButton">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" id="searchInput">
+                            <div class="input-group-append">
+                                <button class="btn btn-form" type="button" id="searchButton">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                     <!-- Page Heading -->
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
@@ -189,24 +186,22 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="userTable">
                                                 @foreach ($users as $user)
-                                                    <tr>
-                                                        <td>{{ $user->name }}</td>
-                                                        <td>{{ $user->phone_number }}</td>
-                                                        <td>{{ $user->role }}</td>
-                                                        <td>{{ $user->address }}</td>
-                                                        <td>
-                                                            <a href="{{ route('admin.edit', $user->id) }}"
-                                                                class="btn btn-info">Detail</a>
-                                                            <form action="{{ route('admin.destroy', $user->id) }}"
-                                                                method="POST" style="display:inline;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger"
-                                                                    onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
-                                                            </form>
-                                                        </td>
+                                                <tr>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->phone_number }}</td>
+                                                    <td>{{ $user->role }}</td>
+                                                    <td>{{ $user->address }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-info">Detail</a>
+                                                        <form action="{{ route('admin.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -218,11 +213,8 @@
 
                     </div>
                     <!-- End of Main Content -->
-
-
                 </div>
                 <!-- End of Content Wrapper -->
-
             </div>
             <!-- End of Page Wrapper -->
 
@@ -247,6 +239,9 @@
             <!-- table list -->
             <script src="{{ asset('assets/js/datatables.js') }}"></script>
             <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+
+            <!-- table search -->
+            <script src="{{ asset('assets/js/search.js') }}"></script>
 
             <!-- Page level custom scripts -->
             <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
